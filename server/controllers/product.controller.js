@@ -52,3 +52,27 @@ export const getAllProducts = async (req, res) => {
       res.status(500).json({ message: 'Error retrieving product', error: error.message });
     }
   };
+
+  export const searchProducts = async (req, res) => {
+    const { category, minPrice, maxPrice } = req.query;
+  
+    try {
+      let query = {};
+  
+      if (category) {
+        query.category = category;
+      }
+  
+      if (minPrice || maxPrice) {
+        query.price = {};
+        if (minPrice) query.price.$gte = minPrice;
+        if (maxPrice) query.price.$lte = maxPrice;
+      }
+  
+      const products = await Product.find(query);
+  
+      res.status(200).json({ products });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
