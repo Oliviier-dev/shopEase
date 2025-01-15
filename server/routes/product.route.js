@@ -6,5 +6,7 @@ const productRoute = express.Router();
 
 productRoute.post('/add', isAdmin, ProductController.addProduct);
 productRoute.delete('/delete/:id', isAdmin, ProductController.deleteProduct);
+productRoute.get('/', ProductController.getAllProducts);
+productRoute.get('/:id', ProductController.getProductById);
 
 export default productRoute;
