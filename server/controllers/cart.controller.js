@@ -64,7 +64,12 @@ export const viewCart = async (req, res) => {
 
     if (!cart) return res.status(404).json({ message: "Cart is empty" });
 
-    res.status(200).json(cart);
+    // Calculate total price
+    const totalPrice = cart.products.reduce((total, item) => {
+      return total + item.productId.price * item.quantity;
+    }, 0);
+
+    res.status(200).json({ cart, totalPrice });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
