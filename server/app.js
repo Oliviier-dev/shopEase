@@ -12,13 +12,15 @@ const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
+  origin: (origin, callback) => {
+    const allowedOrigins = ['http://localhost:5173', 'https://shop-ease-tau-umber.vercel.app/'];
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
 };
-
-if (process.env.NODE_ENV === 'production') {
-  corsOptions.origin = process.env.FRONTEND_URL;
-} else {
-  corsOptions.origin = 'http://localhost:5173';
-}
 
 // Middleware
 app.use(cors(corsOptions));
