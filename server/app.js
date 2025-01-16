@@ -13,7 +13,7 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
   origin: (origin, callback) => {
-    const allowedOrigins = ['http://localhost:5173', 'https://shop-ease-tau-umber.vercel.app/'];
+    const allowedOrigins = ['http://localhost:5173', 'https://shop-ease-tau-umber.vercel.app'];
     if (allowedOrigins.includes(origin) || !origin) {
       callback(null, true);
     } else {
