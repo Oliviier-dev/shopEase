@@ -18,7 +18,7 @@ function App() {
     <div className="App font-lato">
       <ToastContainer />
       {showNavbar && (
-        <div className="bg-[#2f6889] bg-cover bg-center bg-no-repeat">
+        <div className="bg-[#2f6889] bg-cover bg-center bg-no-repeat relative z-30">
           <Navbar />
         </div>
       )}
