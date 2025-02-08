@@ -1,13 +1,15 @@
 import React from "react";
-import HeroShowProduct from "../components/HeroShowProduct";
+import HeroSection from "../components/HeroSection";
+import bgImage from "../assets/home-new-bg-free-img.jpg";
 import ProductMarquee from "../components/ProductMarquee";
-import { Link } from "react-router-dom";
 import ProductList from "../components/ProductList";
 
-const HeroSection: React.FC = () => {
+
+const HomePage: React.FC = () => {
   return (
-    <div className="max-tablet:px-4 backgroundImage">
-      <div className="px-4 pt-6 flex flex-col lg:flex-row gap-6 justify-between font-outfit">
+    <div className="relative bg-cover bg-center h-screen" style={{ backgroundImage: `url(${bgImage})` }}>
+      <HeroSection />
+      {/* <div className="px-4 pt-6 flex flex-col lg:flex-row gap-6 justify-between font-outfit">
         <div className="pt-4 pl-12 max-tablet:pl-2 flex flex-col justify-center lg:w-1/2">
           <h1 className="text-6xl font-bold max-tablet:text-2xl">Store.</h1>
           <h2 className="text-3xl text-slate-500 mt-4 max-laptop:text-xl max-tablet:text-lg">
@@ -37,20 +39,20 @@ const HeroSection: React.FC = () => {
         <div className="flex items-center justify-center lg:w-1/2">
           <HeroShowProduct />
         </div>
-      </div>
+      </div> */}
 
-      <div className="mt-8">
+      {/* <div className="mt-8">
         <ProductMarquee />
-      </div>
+      </div> */}
 
-      <div className="mt-12 px-4">
+      {/* <div className="mt-12 px-4">
         <h2 className="text-4xl font-bold text-center mb-8">
           Shop All Latest Offers and Innovations
         </h2>
         <ProductList />
-      </div>
+      </div> */}
     </div>
   );
 };
 
-export default HeroSection;
+export default HomePage;
