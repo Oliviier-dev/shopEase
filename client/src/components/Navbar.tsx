@@ -1,89 +1,82 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaUser } from "react-icons/fa";
 
 const Navbar: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const cartItemCount = 0;
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
 
-  useEffect(() => {
-    const cookies = document.cookie.split("; ").reduce(
-      (acc, cookie) => {
-        const [key, value] = cookie.split("=");
-        acc[key] = value;
-        return acc;
-      },
-      {} as Record<string, string>,
-    );
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-    setIsLoggedIn(!!cookies.token);
-  }, []);
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setDropdownOpen(true);
+  };
 
-  const handleLogout = () => {
-    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    setIsLoggedIn(false);
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setDropdownOpen(false);
+    }, 300);
   };
 
   return (
-    <nav className="bg-white shadow-md">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <div className="text-2xl font-bold text-blue-600">
-          <Link to="/">shopEase</Link>
+    <nav className="bg-opacity-5 shadow-md p-6 z-10 w-full">
+      <div className="container mx-auto flex justify-between items-center">
+        <div className="flex items-center gap-14">
+          <Link
+            to="/"
+            className="text-2xl font-bold text-white hover:text-gray-300 transition-all duration-300"
+          >
+            shopEase
+          </Link>
+
+          <div className="flex gap-4 text-white">
+            {[
+              { path: "/shop", label: "EVERYTHING" },
+              { path: "/accessories", label: "ACCESSORIES" },
+              { path: "/clothes", label: "CLOTHES" },
+              { path: "/phones", label: "BOOKS" },
+            ].map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className="relative px-2 py-1 transition-all font-medium duration-300 hover:text-gray-300"
+              >
+                {link.label}
+                <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-white transition-all duration-300 hover:w-full"></span>
+              </Link>
+            ))}
+          </div>
         </div>
 
-        {/* Navigation Links */}
-        <div className="hidden md:flex space-x-6">
-          <Link to="/" className="text-gray-600 hover:text-blue-600">
-            Home
+        <div className="flex items-center space-x-6">
+          <Link to="/cart" className="relative text-white">
+            <FaShoppingCart className="w-6 h-6 transition-all duration-300 hover:text-gray-300" />
           </Link>
-          <Link to="/products" className="text-gray-600 hover:text-blue-600">
-            Products
-          </Link>
-          <Link to="/about" className="text-gray-600 hover:text-blue-600">
-            About
-          </Link>
-        </div>
 
-        {/* Action Buttons */}
-        <div className="flex items-center space-x-4">
-          {isLoggedIn ? (
-            <>
-              {/* Cart Icon */}
-              <Link
-                to="/cart"
-                className="relative text-gray-600 hover:text-blue-600"
-              >
-                <FaShoppingCart size={24} />
-                {cartItemCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                    {cartItemCount}
-                  </span>
-                )}
-              </Link>
+          <div
+            className="relative"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <FaUser className="w-6 h-6 text-white cursor-pointer transition-all duration-300 hover:text-gray-300" />
 
-              <button
-                onClick={handleLogout}
-                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link
-                to="/signup"
-                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-              >
-                Sign Up
-              </Link>
-              <Link
-                to="/login"
-                className="border border-blue-600 text-blue-600 px-4 py-2 rounded hover:bg-blue-50"
-              >
-                Log In
-              </Link>
-            </>
-          )}
+            {isDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-36 bg-white shadow-md rounded-lg">
+                <Link
+                  to="/login"
+                  className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
+                >
+                  Log In
+                </Link>
+                <Link
+                  to="/signup"
+                  className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
+                >
+                  Sign Up
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </nav>
