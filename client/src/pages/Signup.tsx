@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { loginUser } from "../services/authServices";
+import { registerUser } from "../services/authServices";
 import bgImage from "../assets/hc-digital-7qCeFo19r24-unsplash.jpg";
 
-const Login: React.FC = () => {
+const Signup: React.FC = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -16,12 +18,16 @@ const Login: React.FC = () => {
     e.preventDefault();
     setLoading(true);
 
+    const name = `${firstName} ${lastName}`.trim();
+
     try {
-      await loginUser(email, password);
-      toast.success("Login successful!");
-      navigate("/");
+      await registerUser(name, email, password);
+      toast.success("User created successfully!");
+      navigate("/login");
     } catch (err: any) {
-      toast.error(err);
+      const errorMessage =
+        err.response?.data?.message || "Sign Up failed. Please try again.";
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -36,15 +42,33 @@ const Login: React.FC = () => {
 
       <div className="w-full md:w-1/2 flex items-center justify-center p-8">
         <div className="max-w-md w-full">
-          <h2 className="text-3xl font-semibold mb-4">Welcome Back</h2>
+          <h2 className="text-3xl font-semibold mb-4">Create Account</h2>
           <p className="text-gray-600 mb-6">
-            New here?{" "}
-            <Link to="/signup" className="text-blue-600 hover:underline">
-              Create an account
+            Already have an account?{" "}
+            <Link to="/login" className="text-blue-600 hover:underline">
+              Log In
             </Link>
           </p>
 
           <form onSubmit={handleSubmit}>
+            <div className="flex gap-4 mb-4">
+              <input
+                type="text"
+                placeholder="First Name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className="w-1/2 p-3 border rounded-md"
+                required
+              />
+              <input
+                type="text"
+                placeholder="Last Name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                className="w-1/2 p-3 border rounded-md"
+                required
+              />
+            </div>
             <input
               type="email"
               placeholder="Email"
@@ -53,7 +77,6 @@ const Login: React.FC = () => {
               className="w-full p-3 border rounded-md mb-4"
               required
             />
-
             <div className="relative mb-4">
               <input
                 type={showPassword ? "text" : "password"}
@@ -76,6 +99,13 @@ const Login: React.FC = () => {
               </button>
             </div>
 
+            <div className="flex items-center mb-4">
+              <input type="checkbox" id="terms" className="mr-2" required />
+              <label htmlFor="terms" className="text-gray-600 text-sm">
+                I agree to the terms and conditions
+              </label>
+            </div>
+
             <button
               type="submit"
               className={`w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 ${
@@ -83,7 +113,7 @@ const Login: React.FC = () => {
               }`}
               disabled={loading}
             >
-              {loading ? "Logging in..." : "Log In"}
+              {loading ? "Creating Account..." : "Create Account"}
             </button>
           </form>
           <div className="text-left mt-4">
@@ -97,4 +127,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default Signup;
