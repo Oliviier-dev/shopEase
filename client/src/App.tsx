@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
+import HomePage from "./pages/HomePage";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import { ToastContainer } from "react-toastify";
@@ -15,11 +15,15 @@ function App() {
     location.pathname !== "/login" && location.pathname !== "/signup";
 
   return (
-    <div className="App">
+    <div className="App font-lato">
       <ToastContainer />
-      {showNavbar && <Navbar />}
+      {showNavbar && (
+        <div className="bg-[#2f6889] bg-cover bg-center bg-no-repeat relative z-30">
+          <Navbar />
+        </div>
+      )}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>

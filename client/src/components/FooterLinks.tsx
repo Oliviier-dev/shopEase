@@ -9,7 +9,7 @@ interface linkProp {
   const FooterLinks = ({ title, links }: LinksProps) => {
     return (
       <div>
-        <h1 className="font-bold">{title}</h1>
+        <h1 className="font-bold text-xl">{title}</h1>
         <ul className="pt-4 flex flex-col gap-4">
           {links.map((link, index) => (
             <li key={index}>
