@@ -1,4 +1,4 @@
-import logoImage from '../assets/Group 1000006017.png';
+import { Link } from "react-router-dom";
 import AppStore from '../assets/AppStore.png';
 import GooglePlay from '../assets/GooglePlay.png';
 import FooterLinks from './FooterLinks';
@@ -6,7 +6,7 @@ import FooterLinks from './FooterLinks';
 const Footer = () => {
   const shopLinks = [
     { text: 'Everything', href: 'shop' },
-    { text: 'Accessories', href: 'accessories' },
+    { text: 'Widgets', href: 'widgets' },
     { text: 'Clothes', href: 'clothes' },
   ];
 
@@ -22,24 +22,19 @@ const Footer = () => {
   ];
 
   return (
-    <div className="bg-black py-8 font-outfit text-white">
+    <div className="bg-white py-8 font-outfit text-black border-t-2">
       <div className="container mx-auto px-4 sm:px-6 max-w-screen-xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-12">
-          {/* Logo Section */}
-          <div className="col-span-1 sm:col-span-1 lg:col-span-1 hidden sm:block">
-            <img
-              src={logoImage}
-              alt="Company Logo"
-              className="w-24 sm:w-32 lg:w-40"
-            />
+          <div className="col-span-1 flex items-center justify-start">
+            <Link to="/" className="text-3xl font-bold text-black">
+              shopEase
+            </Link>
           </div>
 
-          {/* Links Section */}
           <FooterLinks title="Account" links={accountLinks} />
           <FooterLinks title="Shop" links={shopLinks} />
           <FooterLinks title="Quick Links" links={quickLinks} />
 
-          {/* Download App Section */}
           <div className="flex flex-col items-center sm:items-start">
             <h1 className="text-lg font-semibold mb-4">Download Our App</h1>
             <div className="flex gap-4">
@@ -61,9 +56,8 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Footer Bottom */}
-        <div className="border-t border-gray-500 mt-8 pt-6">
-          <p className="text-xs text-slate-200 text-center">
+        <div className="border-t border-gray-300 mt-8 pt-6">
+          <p className="text-xs text-gray-600 text-center">
             &copy; shopEase 2025. All rights reserved.
           </p>
         </div>

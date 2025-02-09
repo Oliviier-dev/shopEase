@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex gap-4 text-white">
             {[
               { path: "/shop", label: "EVERYTHING" },
-              { path: "/accessories", label: "ACCESSORIES" },
+              { path: "/widgets", label: "WIDGETS" },
               { path: "/clothes", label: "CLOTHES" },
               { path: "/books", label: "BOOKS" },
             ].map((link) => (
@@ -109,7 +109,7 @@ const Navbar: React.FC = () => {
           <div className="mt-36 flex flex-col items-center">
             {[
               { path: "/shop", label: "EVERYTHING" },
-              { path: "/accessories", label: "ACCESSORIES" },
+              { path: "/widgets", label: "WIDGETS" },
               { path: "/clothes", label: "CLOTHES" },
               { path: "/phones", label: "BOOKS" },
               { path: "/login", label: "Log In" },
