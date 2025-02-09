@@ -6,7 +6,7 @@ import FooterLinks from './FooterLinks';
 const Footer = () => {
   const shopLinks = [
     { text: 'Everything', href: 'shop' },
-    { text: 'Accessories', href: 'accessories' },
+    { text: 'Widgets', href: 'widgets' },
     { text: 'Clothes', href: 'clothes' },
   ];
 
