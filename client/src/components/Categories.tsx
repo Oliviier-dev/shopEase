@@ -30,9 +30,9 @@ const Categories: React.FC = () => {
   ];
 
   return (
-    <div className="py-10 bg-white">
-      <div className="max-w-6xl mx-auto px-5">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <div className="py-10 bg-white mb-10">
+      <div className="max-w-6xl mx-auto px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {categories.map((category, index) => (
             <div
               key={index}

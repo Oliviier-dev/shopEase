@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import bgImage from "../assets/home-new-bg-free-img.jpg";
 
 const HeroSection = () => {
+  const isMobile = window.innerWidth <= 768;
   return (
     <section
-      className="relative bg-cover bg-center min-h-[55vh] md:min-h-[calc(100vh-80px)] flex items-center font-lato before:absolute before:inset-0 before:bg-gradient-to-t before:from-[#2c5a73] before:via-[#1B5C7E]/60 before:to-[#2c5a73]/30 before:opacity-70"
+      className="relative bg-cover bg-center min-h-[75vh] md:min-h-[calc(100vh-80px)] flex items-center font-lato before:absolute before:inset-0 before:bg-gradient-to-t before:from-[#2c5a73] before:via-[#1B5C7E]/60 before:to-[#2c5a73]/30 before:opacity-70"
       style={{
-        backgroundAttachment: "fixed",
+        backgroundAttachment: isMobile ? "scroll" : "fixed",
         backgroundImage: `url(${bgImage})`,
       }}
     >
