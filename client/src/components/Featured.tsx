@@ -18,8 +18,8 @@ const products = [
 
 const Featured: React.FC = () => {
   return (
-    <div className="bg-[#F6F7F9] w-full py-16">
-      <div className="max-w-screen-xl mx-auto px-4">
+    <div className="bg-[#F6F7F9] w-full py-20">
+      <div className="max-w-screen-xl mx-auto px-8 md:px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">Featured Products</h2>
           <div className="w-24 mx-auto h-1 bg-[#0084D6]"></div>
@@ -31,7 +31,7 @@ const Featured: React.FC = () => {
               key={product.id} 
               className="group rounded-lg overflow-hidden"
             >
-              <div className="w-full h-56 relative overflow-hidden">
+              <div className="w-full h-96 md:h-64 relative overflow-hidden">
                 <img 
                   src={product.image} 
                   alt={product.name} 
