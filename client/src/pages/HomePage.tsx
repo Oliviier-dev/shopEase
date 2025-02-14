@@ -6,6 +6,7 @@ import Categories from "../components/Categories";
 import Featured from "../components/Featured";
 import FeaturedSkeleton from '../components/FeaturedSkeleton';
 import CategoriesSkeleton from '../components/CategoriesSkeleton';
+import PromotionSection from "../components/Promotion";
 
 const HomePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -21,6 +22,7 @@ const HomePage: React.FC = () => {
       <Sponsors />
       {isLoading ? <CategoriesSkeleton /> : <Categories />}
       {isLoading ? <FeaturedSkeleton /> : <Featured />}
+      <PromotionSection />
     </div>
   );
 };

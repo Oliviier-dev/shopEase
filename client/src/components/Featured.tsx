@@ -4,16 +4,16 @@ import bgImage1 from "../assets/premium_photo-1675186049366-64a655f8f537.avif";
 import bgImage2 from "../assets/premium_photo-1677187301660-5e557d9c0724.avif";
 
 const products = [
-  { id: 1, name: 'Product 1', price: '$20', category: 'Category A', image: bgImage1 },
-  { id: 2, name: 'Product 2', price: '$30', category: 'Category B', image: bgImage2 },
-  { id: 3, name: 'Product 3', price: '$25', category: 'Category A', image: bgImage1 },
-  { id: 4, name: 'Product 4', price: '$15', category: 'Category C', image: bgImage2 },
-  { id: 5, name: 'Product 5', price: '$40', category: 'Category B', image: bgImage1 },
-  { id: 6, name: 'Product 6', price: '$50', category: 'Category A', image: bgImage2 },
-  { id: 7, name: 'Product 7', price: '$35', category: 'Category C', image: bgImage1 },
-  { id: 8, name: 'Product 8', price: '$60', category: 'Category B', image: bgImage2 },
-  { id: 9, name: 'Product 9', price: '$45', category: 'Category A', image: bgImage1 },
-  { id: 10, name: 'Product 10', price: '$55', category: 'Category C', image: bgImage2 },
+  { id: 1, name: 'Product 1', price: '$19.99', category: 'Category A', image: bgImage1 },
+  { id: 2, name: 'Product 2', price: '$29.99', category: 'Category B', image: bgImage2 },
+  { id: 3, name: 'Product 3', price: '$24.99', category: 'Category A', image: bgImage1 },
+  { id: 4, name: 'Product 4', price: '$14.99', category: 'Category C', image: bgImage2 },
+  { id: 5, name: 'Product 5', price: '$39.99', category: 'Category B', image: bgImage1 },
+  { id: 6, name: 'Product 6', price: '$49.99', category: 'Category A', image: bgImage2 },
+  { id: 7, name: 'Product 7', price: '$34.99', category: 'Category C', image: bgImage1 },
+  { id: 8, name: 'Product 8', price: '$59.99', category: 'Category B', image: bgImage2 },
+  { id: 9, name: 'Product 9', price: '$44.99', category: 'Category A', image: bgImage1 },
+  { id: 10, name: 'Product 10', price: '$54.99', category: 'Category C', image: bgImage2 },
 ];
 
 const Featured: React.FC = () => {
