@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/Footer";
 import NotFoundPage from "./components/NotFound";
+import SingleProduct from "./components/SingleProduct";
 
 function App() {
   const location = useLocation();
@@ -27,6 +28,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/product/:id" element={<SingleProduct />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
       {showFooter && <Footer />}

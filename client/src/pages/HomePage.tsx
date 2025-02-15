@@ -4,8 +4,8 @@ import HeroSection from "../components/HeroSection";
 import Sponsors from "../components/Sponsors";
 import Categories from "../components/Categories";
 import Featured from "../components/Featured";
-import FeaturedSkeleton from '../components/FeaturedSkeleton';
-import CategoriesSkeleton from '../components/CategoriesSkeleton';
+import FeaturedSkeleton from '../components/skeletons/FeaturedSkeleton';
+import CategoriesSkeleton from '../components/skeletons/CategoriesSkeleton';
 import PromotionSection from "../components/Promotion";
 
 const HomePage: React.FC = () => {
