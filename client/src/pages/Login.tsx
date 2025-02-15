@@ -23,7 +23,7 @@ const Login: React.FC = () => {
       const userData = await loginUser(email, password);
       setIsAuthenticated(true);
       setUserData(userData);
-      toast.success("Login successful!");
+      toast.success("Login successfully!");
       navigate("/");
     } catch (err: any) {
       toast.error(err);

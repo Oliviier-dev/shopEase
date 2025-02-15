@@ -50,9 +50,12 @@ const Navbar: React.FC = () => {
       setIsAuthenticated(false);
       setUserData(null);
       navigate("/");
-      toast.success("Logged out successful!");
+      toast.success("Logged out successfully!");
+
+      // Close the dropdown immediately after logout
+      setDropdownOpen(false);
     } catch (error: any) {
-      toast.error("An erro occured, Try again Later");
+      toast.error("An error occurred, try again later");
     }
   };
 
@@ -100,7 +103,25 @@ const Navbar: React.FC = () => {
             onMouseLeave={handleMouseLeave}
           >
             {!isAuthenticated ? (
-              <FaUser className="w-6 h-6 text-white cursor-pointer transition-all duration-300 hover:text-gray-300" />
+              <>
+                <FaUser className="w-6 h-6 text-white cursor-pointer transition-all duration-300 hover:text-gray-300" />
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-36 bg-white shadow-md z-50">
+                    <Link
+                      to="/login"
+                      className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
+                    >
+                      Log In
+                    </Link>
+                    <Link
+                      to="/signup"
+                      className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
+                    >
+                      Sign Up
+                    </Link>
+                  </div>
+                )}
+              </>
             ) : (
               <button
                 onClick={handleLogout}
@@ -109,23 +130,6 @@ const Navbar: React.FC = () => {
                 <MdLogout className="w-5 h-5" />
                 Logout
               </button>
-            )}
-
-            {isDropdownOpen && !isAuthenticated && (
-              <div className="absolute right-0 mt-2 w-36 bg-white shadow-md z-50">
-                <Link
-                  to="/login"
-                  className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
-                >
-                  Log In
-                </Link>
-                <Link
-                  to="/signup"
-                  className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
-                >
-                  Sign Up
-                </Link>
-              </div>
             )}
           </div>
 
