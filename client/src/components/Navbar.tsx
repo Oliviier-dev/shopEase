@@ -1,10 +1,12 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaShoppingCart, FaUser, FaBars, FaTimes } from "react-icons/fa";
+import CartDrawer from "./CartDrawer";
 
 const Navbar: React.FC = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isNavOpen, setNavOpen] = useState(false);
+  const [isCartOpen, setCartOpen] = useState(false);
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -26,6 +28,15 @@ const Navbar: React.FC = () => {
   const closeNav = () => {
     setNavOpen(false);
   };
+
+  const toggleCart = () => {
+    setCartOpen(!isCartOpen);
+  };
+
+  const closeCart = () => {
+    setCartOpen(false);
+  };
+
 
   return (
     <nav className="bg-opacity-5 shadow-md p-6 z-40 w-full">
@@ -58,9 +69,9 @@ const Navbar: React.FC = () => {
         </div>
 
         <div className="flex items-center space-x-6">
-          <Link to="/cart" className="relative text-white">
+          <div className="relative text-white cursor-pointer" onClick={toggleCart}>
             <FaShoppingCart className="w-6 h-6 transition-all duration-300 hover:text-gray-300" />
-          </Link>
+          </div>
 
           <div
             className="relative hidden md:block"
@@ -127,6 +138,8 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <CartDrawer isOpen={isCartOpen} onClose={closeCart} />
 
       {/* Overlay */}
       {isNavOpen && (
