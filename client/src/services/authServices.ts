@@ -39,3 +39,12 @@ export const verifyUser = async() => {
     throw error.response?.data?.message || "Verifying user failed.";
   }
 }
+
+export const logoutUser = async () => {
+  try {
+    const response = await axios.post(`${API_URL}/api/v1/user/logout`, {}, { withCredentials: true });
+    return response.data;
+  } catch (error: any) {
+    throw error.response?.data?.message || "Logout failed. Please try again.";
+  }
+};
