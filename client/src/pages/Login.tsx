@@ -23,8 +23,13 @@ const Login: React.FC = () => {
       const userData = await loginUser(email, password);
       setIsAuthenticated(true);
       setUserData(userData);
+      if (userData?.role === "admin" || userData?.role === "superadmin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
+  
       toast.success("Login successfully!");
-      navigate("/");
     } catch (err: any) {
       toast.error(err);
     } finally {
