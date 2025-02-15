@@ -17,8 +17,8 @@ const Footer = () => {
 
   const quickLinks = [
     { text: 'Books', href: 'books' },
-    { text: 'Careers', href: '#' },
-    { text: 'Blog', href: '#' },
+    { text: 'Careers', href: 'careers' },
+    { text: 'Blog', href: 'blog' },
   ];
 
   return (
@@ -38,14 +38,14 @@ const Footer = () => {
           <div className="flex flex-col items-center sm:items-start">
             <h1 className="text-lg font-semibold mb-4">Download Our App</h1>
             <div className="flex gap-4">
-              <a href="#" aria-label="Download on the App Store">
+              <a href="appstore" aria-label="Download on the App Store">
                 <img
                   src={AppStore}
                   alt="Download on the App Store"
                   className="w-24 sm:w-32"
                 />
               </a>
-              <a href="#" aria-label="Get it on Google Play">
+              <a href="googleplay" aria-label="Get it on Google Play">
                 <img
                   src={GooglePlay}
                   alt="Get it on Google Play"
