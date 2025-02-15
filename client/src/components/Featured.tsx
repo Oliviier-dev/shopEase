@@ -109,7 +109,7 @@ const Featured: React.FC = () => {
                   <p className="text-lg font-bold text-[#0084D6]">
                     {product.price}
                   </p>
-                  <button className="p-2 rounded-full bg-gray-100 hover:bg-[#0084D6] hover:text-white transition-colors duration-300">
+                  <button className="p-2 rounded-full bg-gray-200 hover:bg-[#0084D6] hover:text-white transition-colors duration-300">
                     <FaShoppingCart className="w-5 h-5" />
                   </button>
                 </div>
