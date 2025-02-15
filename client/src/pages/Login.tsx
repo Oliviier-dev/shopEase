@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useAuth } from "../context/AuthContext";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { loginUser } from "../services/authServices";
 import bgImage from "../assets/hc-digital-7qCeFo19r24-unsplash.jpg";
@@ -12,12 +13,16 @@ const Login: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const { setUserData, setIsAuthenticated } = useAuth();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
+  
     try {
-      await loginUser(email, password);
+      const userData = await loginUser(email, password);
+      setIsAuthenticated(true);
+      setUserData(userData);
       toast.success("Login successful!");
       navigate("/");
     } catch (err: any) {

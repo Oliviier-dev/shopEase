@@ -22,8 +22,20 @@ export const loginUser = async (email: string, password: string) => {
       { email, password },
       { withCredentials: true },
     );
-    return response.data;
+    return response.data.user;
   } catch (error: any) {
     throw error.response?.data?.message || "Login failed. Please try again.";
   }
 };
+
+export const verifyUser = async() => {
+  try {
+    const response = await axios.get(`${API_URL}/api/v1/user/me`, {
+      withCredentials: true,
+    });
+
+    return response;
+  } catch (error: any) {
+    throw error.response?.data?.message || "Verifying user failed.";
+  }
+}
