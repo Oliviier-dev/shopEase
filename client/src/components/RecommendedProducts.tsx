@@ -5,7 +5,7 @@ import bgImage1 from "../assets/premium_photo-1675186049366-64a655f8f537.avif";
 import bgImage2 from "../assets/premium_photo-1677187301660-5e557d9c0724.avif";
 import bgImage3 from "../assets/airpods-max-select-silver-202011.jpeg";
 import bgImage4 from "../assets/store-card-40-ipad-pro-202405.jpeg";
-import RecommendedProductsSkeleton from "./RecommendedProductsSkeleton";
+import RecommendedProductsSkeleton from "./skeletons/RecommendedProductsSkeleton";
 
 const recommendedProducts = [
   {
