@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/Footer";
 import NotFoundPage from "./components/NotFound";
 import SingleProduct from "./components/SingleProduct";
+import Dashboard from "./pages/AdminDashboard";
 
 function App() {
   const location = useLocation();
@@ -31,6 +32,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/product/:id" element={<SingleProduct />} />
+          <Route path="/admin" element={<Dashboard />} />
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
         {showFooter && <Footer />}

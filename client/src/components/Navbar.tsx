@@ -50,8 +50,6 @@ const Navbar: React.FC = () => {
       setIsAuthenticated(false);
       setUserData(null);
       navigate("/");
-      toast.success("Logged out successfully!");
-
       // Close the dropdown immediately after logout
       setDropdownOpen(false);
     } catch (error: any) {

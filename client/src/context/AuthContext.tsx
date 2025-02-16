@@ -10,6 +10,7 @@ import { verifyUser } from "../services/authServices";
 interface AuthContextType {
   isAuthenticated: boolean;
   userData: { id: string; email: string; role: string } | null;
+  loading: boolean;
   setIsAuthenticated: (isAuthenticated: boolean) => void;
   setUserData: (
     userData: { id: string; email: string; role: string } | null,
@@ -25,17 +26,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     email: string;
     role: string;
   } | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const response = await verifyUser();
-
         setIsAuthenticated(true);
         setUserData(response.data.user);
       } catch (error) {
         setIsAuthenticated(false);
         setUserData(null);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -44,7 +47,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, userData, setIsAuthenticated, setUserData }}
+      value={{ isAuthenticated, userData, loading, setIsAuthenticated, setUserData }}
     >
       {children}
     </AuthContext.Provider>
