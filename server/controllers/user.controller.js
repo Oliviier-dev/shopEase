@@ -38,7 +38,7 @@ export const userLogin = async (req, res) => {
 
     const token = jwt.sign(
       { id: user._id, email: user.email, role: user.role },
-      "secret_key",
+      process.env.JWT_SECRET,
       { expiresIn: "1h" },
     );
 
@@ -49,11 +49,33 @@ export const userLogin = async (req, res) => {
       maxAge: 60 * 60 * 1000,
     });
 
-    res.status(200).json({ message: "Login successful" });
+    res.status(200).json({
+      message: "Login successful",
+      user: {
+        id: user._id,
+        email: user.email,
+        role: user.role
+      }
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const verifyUser = (req, res) => {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  try {
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    res.status(200).json({ user: decodedToken });
+  } catch (error) {
+    res.status(401).json({ message: "Invalid token" });
+  }
+}
 
 export const userLogout = (req, res) => {
   res.clearCookie("token", {

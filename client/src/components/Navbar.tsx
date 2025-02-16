@@ -1,9 +1,16 @@
 import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAuth } from "../context/AuthContext";
 import { FaShoppingCart, FaUser, FaBars, FaTimes } from "react-icons/fa";
+import { MdLogout } from "react-icons/md";
 import CartDrawer from "./CartDrawer";
+import { logoutUser } from "../services/authServices";
 
 const Navbar: React.FC = () => {
+  const { isAuthenticated, setIsAuthenticated, setUserData } = useAuth();
+  const navigate = useNavigate();
+
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isNavOpen, setNavOpen] = useState(false);
   const [isCartOpen, setCartOpen] = useState(false);
@@ -37,6 +44,18 @@ const Navbar: React.FC = () => {
     setCartOpen(false);
   };
 
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+      setIsAuthenticated(false);
+      setUserData(null);
+      navigate("/");
+      // Close the dropdown immediately after logout
+      setDropdownOpen(false);
+    } catch (error: any) {
+      toast.error("An error occurred, try again later");
+    }
+  };
 
   return (
     <nav className="bg-opacity-5 shadow-md p-6 z-40 w-full">
@@ -69,7 +88,10 @@ const Navbar: React.FC = () => {
         </div>
 
         <div className="flex items-center space-x-6">
-          <div className="relative text-white cursor-pointer" onClick={toggleCart}>
+          <div
+            className="relative text-white cursor-pointer"
+            onClick={toggleCart}
+          >
             <FaShoppingCart className="w-6 h-6 transition-all duration-300 hover:text-gray-300" />
           </div>
 
@@ -78,23 +100,34 @@ const Navbar: React.FC = () => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <FaUser className="w-6 h-6 text-white cursor-pointer transition-all duration-300 hover:text-gray-300" />
-
-            {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-36 bg-white shadow-md rounded-lg z-50">
-                <Link
-                  to="/login"
-                  className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
-                >
-                  Log In
-                </Link>
-                <Link
-                  to="/signup"
-                  className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
-                >
-                  Sign Up
-                </Link>
-              </div>
+            {!isAuthenticated ? (
+              <>
+                <FaUser className="w-6 h-6 text-white cursor-pointer transition-all duration-300 hover:text-gray-300" />
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-36 bg-white shadow-md z-50">
+                    <Link
+                      to="/login"
+                      className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
+                    >
+                      Log In
+                    </Link>
+                    <Link
+                      to="/signup"
+                      className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
+                    >
+                      Sign Up
+                    </Link>
+                  </div>
+                )}
+              </>
+            ) : (
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 text-red-600 text-lg font-medium hover:text-red-700 cursor-pointer"
+              >
+                <MdLogout className="w-5 h-5" />
+                Logout
+              </button>
             )}
           </div>
 
@@ -123,18 +156,45 @@ const Navbar: React.FC = () => {
               { path: "/widgets", label: "WIDGETS" },
               { path: "/clothes", label: "CLOTHES" },
               { path: "/phones", label: "BOOKS" },
-              { path: "/login", label: "Log In" },
-              { path: "/signup", label: "Sign Up" },
             ].map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100 w-full text-center mt-4"
+                className="block px-4 py-2 text-gray-700 cursor-pointer w-full text-center mt-4"
                 onClick={closeNav}
               >
                 {link.label}
               </Link>
             ))}
+
+            {!isAuthenticated ? (
+              <>
+                <Link
+                  to="/signup"
+                  className="block px-4 py-2 text-gray-700 cursor-pointer w-full text-center mt-4"
+                  onClick={closeNav}
+                >
+                  Sign Up
+                </Link>
+                <Link
+                  to="/login"
+                  className="block px-4 py-2 text-gray-700 cursor-pointer w-full text-center mt-4"
+                  onClick={closeNav}
+                >
+                  Log In
+                </Link>
+              </>
+            ) : (
+              <button
+                onClick={() => {
+                  handleLogout();
+                  closeNav();
+                }}
+                className="block px-4 py-2 text-red-600 cursor-pointer w-full text-center mt-4"
+              >
+                Logout
+              </button>
+            )}
           </div>
         </div>
       </div>
